@@ -15,6 +15,14 @@ public class Tarea {
     private Collection<Parte> partesById;
     private Collection<TareaMaquina> tareaMaquinasById;
 
+    public Tarea(String nombre, String descripcion, String tipo, byte multiMaquina, byte activo) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+        this.multiMaquina = multiMaquina;
+        this.activo = activo;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {

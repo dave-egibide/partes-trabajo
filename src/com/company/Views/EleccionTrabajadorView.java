@@ -89,7 +89,7 @@ public class EleccionTrabajadorView {
         }
         panelListaTrabajadores.removeAll();
 
-        panelListaTrabajadores.setLayout(new java.awt.GridLayout(4, 4));
+        panelListaTrabajadores.setLayout(new java.awt.GridLayout(4, 1));
         for (int i = 0; i < trabajadoresPorInicial.size(); ++i) {
             Trabajador trabajador = trabajadoresPorInicial.get(i);
             JButton b = new JButton(trabajador.getApellidos() + ", " + trabajador.getNombre());
@@ -99,7 +99,7 @@ public class EleccionTrabajadorView {
     }
 
     private void filtrarAlfabeto() {
-        trabajadores = TrabajadorController.getAll();
+        trabajadores = TrabajadorController.getAllActivos();
         HashSet<String> iniciales = new HashSet<>();
         for (Trabajador trabajador : trabajadores) {
             iniciales.add(trabajador.getApellidos().substring(0, 1).toLowerCase());
@@ -115,6 +115,7 @@ public class EleccionTrabajadorView {
 
     private void seleccionarTrabajador(Trabajador trabajador) {
         System.out.println(trabajador);
+        new DesarrolloParteView(trabajador);
     }
 
 }

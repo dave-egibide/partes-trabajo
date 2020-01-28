@@ -59,5 +59,10 @@ public class TrabajadorController {
     public static List getAll() {
         return HibernateController.getAll(nombreTabla);
     }
+    public static List getAllActivos() {
+        List<Trabajador> trabajadores = HibernateController.getAll(nombreTabla);
+        trabajadores.removeIf(trabajador -> trabajador.getActivo() == 0);
+        return trabajadores;
+    }
 
 }

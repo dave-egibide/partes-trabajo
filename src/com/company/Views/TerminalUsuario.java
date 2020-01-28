@@ -29,13 +29,13 @@ public class TerminalUsuario {
         frame = new JFrame("TerminalUsuario");
         frame.setContentPane(new TerminalUsuario().panelBase);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setUndecorated(true);
+        //frame.setUndecorated(true);
         frame.pack();
         frame.setLocationRelativeTo(null);
-        frame.setAlwaysOnTop(true);
+        //frame.setAlwaysOnTop(true);
         frame.setTitle("Partes Trabajo - David Roig");
         //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setResizable(false);
+        //frame.setResizable(false);
         frame.setVisible(true);
 
     }

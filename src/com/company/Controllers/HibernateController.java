@@ -265,22 +265,4 @@ public abstract class HibernateController {
         return result;
     }
 
-    static List getResumenGestionesPiezas(String tabla) {
-        //select g.piezas, count(g.cantidad), sum(g.cantidad) from Gestion g group by g.piezas
-        List result = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            Query q = session.createQuery("select g.piezas, count(g.proyectos), sum(g.cantidad) "
-                    + "from " + tabla + " g "
-                    + "group by g.piezas");
-            result = q.list();
-            session.getTransaction().commit();
-            session.close();
-
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        }
-        return result;
-    }
 }

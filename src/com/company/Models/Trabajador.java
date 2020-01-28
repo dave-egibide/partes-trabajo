@@ -13,6 +13,21 @@ public class Trabajador {
     private String puesto;
     private byte activo;
     private Collection<Parte> partesById;
+    private static final String NOMBRETABLA = "Trabajador";
+
+    public Trabajador(String dni, String nombre, String apellidos, String puesto) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.puesto = puesto;
+    }
+
+    public Trabajador() {
+    }
+
+    public static String getNombreTabla() {
+        return NOMBRETABLA;
+    }
 
     @Id
     @Column(name = "id", nullable = false)
@@ -99,5 +114,18 @@ public class Trabajador {
 
     public void setPartesById(Collection<Parte> partesById) {
         this.partesById = partesById;
+    }
+
+    @Override
+    public String toString() {
+        return "Trabajador{" +
+                "id=" + id +
+                ", dni='" + dni + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", puesto='" + puesto + '\'' +
+                ", activo=" + activo +
+                ", partesById=" + partesById +
+                '}';
     }
 }

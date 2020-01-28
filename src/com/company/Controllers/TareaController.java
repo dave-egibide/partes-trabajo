@@ -7,6 +7,8 @@ package com.company.Controllers;
 
 import com.company.Models.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -35,4 +37,12 @@ public abstract class TareaController {
         return HibernateController.getAll(nombreTabla);
     }
 
+    public static List<Maquina> getMaquinas(Tarea tarea) {
+        Collection<TareaMaquina> tareaMaquinas = tarea.getTareaMaquinasById();
+        List<Maquina> maquinas = new ArrayList<>();
+        for (TareaMaquina tareaMaquina:tareaMaquinas) {
+            maquinas.add(tareaMaquina.getMaquinaByIdMaquina());
+        }
+        return maquinas;
+    }
 }

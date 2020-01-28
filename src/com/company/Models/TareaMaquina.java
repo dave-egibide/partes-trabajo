@@ -52,4 +52,6 @@ public class TareaMaquina {
     public void setMaquinaByIdMaquina(Maquina maquinaByIdMaquina) {
         this.maquinaByIdMaquina = maquinaByIdMaquina;
     }
+
+
 }

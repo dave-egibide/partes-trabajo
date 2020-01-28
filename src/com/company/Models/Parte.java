@@ -14,6 +14,17 @@ public class Parte {
     private Maquina maquinaByIdMaquina;
     private Pedido pedidoByIdPedido;
 
+
+    public Parte() {
+    }
+
+    public Parte(int minutos, Trabajador trabajadorByIdTrabajador, Tarea tareaByIdTarea, Maquina maquinaByIdMaquina) {
+        this.minutos = minutos;
+        this.trabajadorByIdTrabajador = trabajadorByIdTrabajador;
+        this.tareaByIdTarea = tareaByIdTarea;
+        this.maquinaByIdMaquina = maquinaByIdMaquina;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
@@ -25,7 +36,7 @@ public class Parte {
     }
 
     @Basic
-    @Column(name = "fecha", nullable = false)
+    @Column(name = "fecha", nullable = true)
     public Date getFecha() {
         return fecha;
     }
@@ -98,4 +109,6 @@ public class Parte {
     public void setPedidoByIdPedido(Pedido pedidoByIdPedido) {
         this.pedidoByIdPedido = pedidoByIdPedido;
     }
+
+
 }

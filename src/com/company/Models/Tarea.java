@@ -2,6 +2,7 @@ package com.company.Models;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +22,9 @@ public class Tarea {
         this.tipo = tipo;
         this.multiMaquina = multiMaquina;
         this.activo = activo;
+    }
+
+    public Tarea() {
     }
 
     @Id
@@ -118,4 +122,17 @@ public class Tarea {
     public void setTareaMaquinasById(Collection<TareaMaquina> tareaMaquinasById) {
         this.tareaMaquinasById = tareaMaquinasById;
     }
+
+    @Override
+    public String toString() {
+        return "Tarea{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", multiMaquina=" + multiMaquina +
+                ", activo=" + activo +
+                '}';
+    }
+
 }

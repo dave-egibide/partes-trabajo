@@ -86,4 +86,14 @@ public class Maquina {
     public void setTareaMaquinasById(Collection<TareaMaquina> tareaMaquinasById) {
         this.tareaMaquinasById = tareaMaquinasById;
     }
+
+    @Override
+    public String toString() {
+        return "Maquina{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", matricula='" + matricula + '\'' +
+                ", activo=" + activo +
+                '}';
+    }
 }

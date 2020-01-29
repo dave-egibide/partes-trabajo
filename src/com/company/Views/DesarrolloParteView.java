@@ -58,7 +58,7 @@ public class DesarrolloParteView {
         TerminalUsuario.getFrame().setContentPane(panelBase);
         TerminalUsuario.getFrame().pack();
         TerminalUsuario.getFrame().setLocationRelativeTo(null);
-        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        TerminalUsuario.getFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         VOLVERButton.addActionListener(e -> {
             if (numVentana < 1) TerminalUsuario.iniciar();

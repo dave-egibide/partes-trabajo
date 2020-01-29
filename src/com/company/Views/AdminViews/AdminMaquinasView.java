@@ -1,4 +1,4 @@
-package com.company.Views;
+package com.company.Views.AdminViews;
 
 import com.company.Controllers.HibernateController;
 import com.company.Controllers.MaquinaController;

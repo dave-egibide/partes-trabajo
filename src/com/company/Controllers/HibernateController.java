@@ -8,12 +8,12 @@ package com.company.Controllers;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
- *
  * @author Dave
  */
 public abstract class HibernateController {
@@ -83,7 +83,7 @@ public abstract class HibernateController {
         return result;
     }
 
-    public static Object getById(String codigo, Class clase) {
+    public static Object getById(int codigo, Class clase) {
         Object objeto = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -104,17 +104,17 @@ public abstract class HibernateController {
             session.getTransaction().commit();
             session.close();
             return true;
-        } catch (HibernateException he) {
-            he.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
 
-    static boolean modify(Object objeto) {
+    public static boolean modify(Object objeto) {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.update(objeto);
+            session.merge(objeto);
             session.getTransaction().commit();
             session.close();
             return true;
@@ -163,7 +163,7 @@ public abstract class HibernateController {
     }
 
     static List<Object> realizarBusquedaConcat(String busqueda, String atributo1,
-            String atributo2, String nombreTabla) {
+                                               String atributo2, String nombreTabla) {
         List result = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();

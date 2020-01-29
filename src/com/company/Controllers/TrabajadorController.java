@@ -4,7 +4,7 @@ import com.company.Models.Trabajador;
 
 import java.util.List;
 
-public class TrabajadorController {
+public abstract class TrabajadorController {
     final static private String nombreTabla = Trabajador.getNombreTabla();
 
     public static int getCount() {

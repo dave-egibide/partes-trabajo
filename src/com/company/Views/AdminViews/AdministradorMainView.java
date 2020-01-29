@@ -1,4 +1,4 @@
-package com.company.Views;
+package com.company.Views.AdminViews;
 
 import com.company.Controllers.HibernateController;
 
@@ -14,6 +14,7 @@ public class AdministradorMainView {
     private JMenuItem menuItemVolver, menuItemSalir, menuItemListaTrabajadores, menuItemAdminTrabajadores,
             menuItemListaTareas, menuItemAdminTareas, menuItemListaMaquinas, menuItemAdminMaquinas, menuItemAcercaDe;
     private static JFrame frame;
+    private static VentanaAcercaDe ventanaAcercaDe;
 
     public static JFrame getFrame() {
         return frame;
@@ -90,6 +91,17 @@ public class AdministradorMainView {
         });
 
         menuItemAcercaDe.addActionListener(e -> {
+            boolean ventanaExiste = false;
+            if (ventanaAcercaDe != null) {
+                ventanaExiste = ventanaAcercaDe.isVisible();
+            }
+            if (!ventanaExiste) {
+                ventanaAcercaDe = new VentanaAcercaDe();
+                ventanaAcercaDe.setLocationRelativeTo(frame);
+                ventanaAcercaDe.load();
+            } else {
+                ventanaAcercaDe.requestFocus();
+            }
         });
     }
 

@@ -14,7 +14,7 @@ public class ResultadoParteView {
         TerminalUsuario.getFrame().setContentPane(panelBase);
         TerminalUsuario.getFrame().pack();
         TerminalUsuario.getFrame().setLocationRelativeTo(null);
-        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        TerminalUsuario.getFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
         if (resultado) {
             textoSuperiorLabel.setText("Parte generado correctamente.");
             textoInferiorLabel.setText("Muchas gracias.");

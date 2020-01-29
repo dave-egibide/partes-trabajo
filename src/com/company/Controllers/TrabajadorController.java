@@ -17,7 +17,7 @@ public class TrabajadorController {
         return HibernateController.add(trabajador);
     }
 
-    public static Trabajador getById(String id) {
+    public static Trabajador getById(int id) {
         return (Trabajador) HibernateController.getById(id, Trabajador.class);
     }
 
@@ -27,7 +27,7 @@ public class TrabajadorController {
         return HibernateController.modify(trabajador);
     }
 
-    public static boolean delete(String id) {
+    public static boolean delete(int id) {
         return HibernateController.delete(getById(id));
 
     }

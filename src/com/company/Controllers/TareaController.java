@@ -22,13 +22,6 @@ public abstract class TareaController {
         return HibernateController.getCount(nombreTabla);
     }
 
-    public static boolean add(String nombre, String descripcion, String tipo, byte multiMaquina, byte activo) {
-
-        Tarea tarea = new Tarea(nombre, descripcion, tipo, multiMaquina, activo);
-
-        return HibernateController.add(tarea);
-    }
-
     public static boolean delete(Tarea tarea) {
         return HibernateController.delete(tarea);
     }
@@ -44,5 +37,13 @@ public abstract class TareaController {
             maquinas.add(tareaMaquina.getMaquinaByIdMaquina());
         }
         return maquinas;
+    }
+    public static Tarea getById(int id) {
+        return (Tarea) HibernateController.getById(id, Tarea.class);
+    }
+    public static List getAllActivos() {
+        List<Tarea> tareas = HibernateController.getAll(nombreTabla);
+        tareas.removeIf(tarea -> tarea.getActivo() == 0);
+        return tareas;
     }
 }

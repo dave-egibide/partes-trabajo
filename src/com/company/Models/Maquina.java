@@ -13,6 +13,21 @@ public class Maquina {
     private Collection<Parte> partesById;
     private Collection<TareaMaquina> tareaMaquinasById;
 
+
+    public Maquina(int id, String nombre, String matricula) {
+        this.id = id;
+        this.nombre = nombre;
+        this.matricula = matricula;
+    }
+
+    public Maquina(String nombre, String matricula) {
+        this.nombre = nombre;
+        this.matricula = matricula;
+    }
+
+    public Maquina() {
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {

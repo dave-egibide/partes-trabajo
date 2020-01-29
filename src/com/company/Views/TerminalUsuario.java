@@ -1,5 +1,7 @@
 package com.company.Views;
 
+import com.company.Controllers.HibernateController;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +39,7 @@ public class TerminalUsuario {
         //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //frame.setResizable(false);
         frame.setVisible(true);
-
+        boolean conectado = HibernateController.conectar();
     }
 
     public static void iniciar () {

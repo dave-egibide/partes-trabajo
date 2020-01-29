@@ -22,6 +22,14 @@ public class Trabajador {
         this.puesto = puesto;
     }
 
+    public Trabajador(int id, String dni, String nombre, String apellidos, String puesto) {
+        this.id = id;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.puesto = puesto;
+    }
+
     public Trabajador() {
     }
 

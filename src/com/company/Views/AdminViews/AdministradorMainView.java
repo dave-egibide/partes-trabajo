@@ -76,6 +76,18 @@ public class AdministradorMainView {
             frame.pack();
         });
 
+        menuItemAdminMaquinas.addActionListener(e -> {
+            AdminMaquinasView adminMaquinasView = new AdminMaquinasView();
+            frame.setContentPane(adminMaquinasView.getPanelBase());
+            frame.pack();
+        });
+
+        menuItemListaMaquinas.addActionListener(e -> {
+            AdminMaquinasView adminMaquinasView = new AdminMaquinasView();
+            frame.setContentPane(adminMaquinasView.getPanelBase());
+            adminMaquinasView.listadoMaquinas();
+            frame.pack();
+        });
 
         menuItemAcercaDe.addActionListener(e -> {
         });

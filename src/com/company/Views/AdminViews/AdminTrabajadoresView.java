@@ -136,10 +136,10 @@ public class AdminTrabajadoresView {
                             JOptionPane.ERROR_MESSAGE);
                 } else {
 
-                    trabajador.setDni(textFieldVal1.getText().trim().toUpperCase());
-                    trabajador.setNombre(StringUtils.capitalize(textFieldVal2.getText().trim().toLowerCase()));
-                    trabajador.setApellidos(StringUtils.capitalize(textFieldVal3.getText().trim().toLowerCase()));
-                    String puesto = StringUtils.capitalize(textFieldVal4.getText().trim().toLowerCase());
+                    trabajador.setDni(StringUtils.left(textFieldVal1.getText().trim().toUpperCase(), 9));
+                    trabajador.setNombre(StringUtils.left(StringUtils.capitalize(textFieldVal2.getText().trim().toLowerCase()), 20));
+                    trabajador.setApellidos(StringUtils.left(StringUtils.capitalize(textFieldVal3.getText().trim().toLowerCase()), 50));
+                    String puesto = StringUtils.left(StringUtils.capitalize(textFieldVal4.getText().trim().toLowerCase()), 20);
                     if (puesto.isBlank()) puesto = null;
                     trabajador.setPuesto(puesto);
 

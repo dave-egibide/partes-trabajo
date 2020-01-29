@@ -1,21 +1,23 @@
 package com.company.Views;
 
 import com.company.Controllers.HibernateController;
-import com.company.Controllers.TareaController;
-import com.company.Models.Tarea;
+import com.company.Controllers.MaquinaController;
+import com.company.Models.Maquina;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
-public class AdminTareasView {
+public class AdminMaquinasView {
     private JPanel panelBase;
     private JTextField textFieldVal1;
     private JButton verButton;
-    private JButton listadoTareasButton;
+    private JButton listadoMaquinasButton;
     private JTextField textFieldVal2;
     private JTextField textFieldVal3;
     private JTextField textFieldVal4;
@@ -27,62 +29,56 @@ public class AdminTareasView {
     private JScrollPane listadoScrollPane;
     private JCheckBox mostrarInactivosCheckBox;
     private JButton gestionarButton;
-    private JComboBox tipoComboBox;
-    private JTextField descripcionTextField;
     private static JFrame frame = AdministradorMainView.getFrame();
 
 
-    public AdminTareasView() {
+    public AdminMaquinasView() {
         verButton.addActionListener(e -> verById(null));
-        listadoTareasButton.addActionListener(e -> listadoTareas());
-        modificarButton.addActionListener(e -> modificarTarea());
-        crearButton.addActionListener(e -> crearTarea());
+        listadoMaquinasButton.addActionListener(e -> listadoMaquinas());
+        modificarButton.addActionListener(e -> modificarMaquina());
+        crearButton.addActionListener(e -> crearMaquina());
         mostrarInactivosCheckBox.addActionListener(e -> listarElemento());
         gestionarButton.addActionListener(e -> {
             String id = String.valueOf(listadoTable.getValueAt(listadoTable.getSelectedRow(), 0));
             verById(id);
             ((CardLayout) cardPanel.getLayout()).show(cardPanel, "gestion");
         });
-        tipoComboBox.addItem("PROD");
-        tipoComboBox.addItem("MANT");
     }
 
-    private void crearTarea() {
+    private void crearMaquina() {
         try {
             int id;
             if (textFieldId.getText().trim().isBlank()) id = -1;
             else id = Integer.parseInt(StringUtils.left(textFieldId.getText().trim(), 5));
 
-            Tarea tarea = TareaController.getById(id);
-            if (tarea != null) {
+            Maquina maquina = MaquinaController.getById(id);
+            if (maquina != null) {
                 JOptionPane.showMessageDialog(AdministradorMainView.getFrame(),
                         "Id ya existente",
                         "Error Creación",
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 String error = "";
-                if (textFieldVal2.getText().trim().equals("")) error = "El Nombre";
-
+                if (textFieldVal1.getText().trim().equals("")) error = "El Nombre";
                 if (!error.isEmpty()) {
                     JOptionPane.showMessageDialog(frame,
-                            error.concat(" de la tarea ha de especificarse"),
+                            error.concat(" de la Máquina ha de especificarse"),
                             "Error Creación",
                             JOptionPane.ERROR_MESSAGE);
                 } else {
 
-                    String nombre = StringUtils.left(StringUtils.capitalize(textFieldVal2.getText().trim().toLowerCase()), 20);
-                    String tipo = String.valueOf(tipoComboBox.getSelectedItem());
-                    String descripcion = StringUtils.left(StringUtils.capitalize(descripcionTextField.getText().trim().toLowerCase()), 200);
-                    if (descripcion.isBlank()) descripcion = null;
+                    String nombre = StringUtils.left(StringUtils.capitalize(textFieldVal2.getText().trim().toLowerCase()), 10);
+                    String matricula = StringUtils.left(StringUtils.capitalize(textFieldVal4.getText().trim().toLowerCase()), 20);
+                    if (matricula.isBlank()) matricula = null;
 
-                    if (id < 1) tarea = new Tarea(nombre, descripcion, tipo);
-                    else tarea = new Tarea(id, nombre, descripcion, tipo);
+                    if (id < 1) maquina = new Maquina(nombre, matricula);
+                    else maquina = new Maquina(id, nombre, matricula);
 
-                    boolean creadoCorrectamente = HibernateController.add(tarea);
+                    boolean creadoCorrectamente = HibernateController.add(maquina);
 
                     if (creadoCorrectamente) {
                         JOptionPane.showMessageDialog(frame,
-                                "Creado correctamente.",
+                                "Creada correctamente.",
                                 "Creación Correcta",
                                 JOptionPane.PLAIN_MESSAGE);
                         limpiarCampos();
@@ -105,11 +101,11 @@ public class AdminTareasView {
 
     }
 
-    private void modificarTarea() {
+    private void modificarMaquina() {
         String id = textFieldId.getText();
         try {
-            Tarea tarea = TareaController.getById(Integer.parseInt(id));
-            if (tarea == null) {
+            Maquina maquina = MaquinaController.getById(Integer.parseInt(id));
+            if (maquina == null) {
                 JOptionPane.showMessageDialog(AdministradorMainView.getFrame(),
                         "Id No Encontrado",
                         "Error Lectura",
@@ -117,20 +113,19 @@ public class AdminTareasView {
             } else {
                 String error = "";
                 if (textFieldVal2.getText().trim().equals("")) error = "El Nombre";
-
-
                 if (!error.isEmpty()) {
                     JOptionPane.showMessageDialog(frame,
-                            error.concat(" de la Tarea ha de especificarse"),
+                            error.concat(" de la Máquina ha de especificarse"),
                             "Error Modificación",
                             JOptionPane.ERROR_MESSAGE);
                 } else {
 
-                    tarea.setNombre(StringUtils.capitalize(textFieldVal2.getText().trim().toLowerCase()));
-                    tarea.setDescripcion(StringUtils.capitalize(descripcionTextField.getText().trim().toLowerCase()));
-                    tarea.setTipo(String.valueOf(tipoComboBox.getSelectedItem()));
+                    maquina.setNombre(StringUtils.left(StringUtils.capitalize(textFieldVal2.getText().trim().toLowerCase()), 10));
+                    String matricula = StringUtils.left(StringUtils.capitalize(textFieldVal4.getText().trim().toLowerCase()), 20);
+                    if (matricula.isBlank()) matricula = null;
+                    maquina.setMatricula(matricula);
 
-                    boolean modificadoCorrectamente = HibernateController.modify(tarea);
+                    boolean modificadoCorrectamente = HibernateController.modify(maquina);
 
                     if (modificadoCorrectamente) {
                         JOptionPane.showMessageDialog(frame,
@@ -161,11 +156,10 @@ public class AdminTareasView {
     private void limpiarCampos() {
         textFieldId.setText("");
         textFieldVal2.setText("");
-        descripcionTextField.setText("");
-        tipoComboBox.setSelectedIndex(0);
+        textFieldVal4.setText("");
     }
 
-    public void listadoTareas() {
+    public void listadoMaquinas() {
         ((CardLayout) cardPanel.getLayout()).show(cardPanel, "listado");
         listarElemento();
     }
@@ -175,24 +169,22 @@ public class AdminTareasView {
         Vector tableData = new Vector();
         tableHeaders.add("ID");
         tableHeaders.add("Nombre");
-        tableHeaders.add("Descripción");
-        tableHeaders.add("Tipo");
+        tableHeaders.add("Matrícula");
         tableHeaders.add("Activo");
 
-        List<Tarea> tareas;
+        List<Maquina> maquinas;
 
-        if (mostrarInactivosCheckBox.isSelected()) tareas = TareaController.getAll();
-        else tareas = TareaController.getAllActivos();
+        if (mostrarInactivosCheckBox.isSelected()) maquinas = MaquinaController.getAll();
+        else maquinas = MaquinaController.getAllActivos();
 
-        for (Object o : tareas) {
-            Tarea tarea = (Tarea) o;
+        for (Object o : maquinas) {
+            Maquina maquina = (Maquina) o;
             Vector<Object> linea = new Vector<>();
-            linea.add(tarea.getId());
-            linea.add(tarea.getNombre());
-            linea.add(tarea.getDescripcion());
-            linea.add(tarea.getTipo());
+            linea.add(maquina.getId());
+            linea.add(maquina.getNombre());
+            linea.add(maquina.getMatricula());
             String activo;
-            if (tarea.getActivo() == 1) activo = "Sí";
+            if (maquina.getActivo() == 1) activo = "Sí";
             else activo = "No";
             linea.add(activo);
             tableData.add(linea);
@@ -231,17 +223,16 @@ public class AdminTareasView {
             id = textFieldId.getText();
         }
         try {
-            Tarea tarea = TareaController.getById(Integer.parseInt(id));
-            if (tarea == null) {
+            Maquina maquina = MaquinaController.getById(Integer.parseInt(id));
+            if (maquina == null) {
                 JOptionPane.showMessageDialog(AdministradorMainView.getFrame(),
                         "Id No Encontrado",
                         "Error Lectura",
                         JOptionPane.ERROR_MESSAGE);
             } else {
-                textFieldId.setText(String.valueOf(tarea.getId()));
-                textFieldVal2.setText(tarea.getNombre());
-                descripcionTextField.setText(tarea.getDescripcion());
-                tipoComboBox.setSelectedItem(tarea.getTipo());
+                textFieldId.setText(String.valueOf(maquina.getId()));
+                textFieldVal2.setText(maquina.getNombre());
+                textFieldVal4.setText(maquina.getMatricula());
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(AdministradorMainView.getFrame(),
